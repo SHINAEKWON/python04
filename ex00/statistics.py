@@ -1,8 +1,10 @@
 def mean(list_args: list) -> float:
+    """Returns the mean of the values in received list"""
     return sum(list_args)/len(list_args)
 
 
 def median(list_args: list) -> float:
+    """Returns the median of the values in received list"""
     list_args = sorted(list_args)
     n = len(list_args)
     mid = n // 2
@@ -19,6 +21,7 @@ def median(list_args: list) -> float:
 
 
 def quartile1_4(list_args: list) -> float:
+    """"""
     median_value = median(list_args)
     # print("inside quartile1_4, median_value :", median_value)
     new_list = [x for x in list_args if x <= median_value]
