@@ -21,7 +21,7 @@ def median(list_args: list) -> float:
 
 
 def quartile1_4(list_args: list) -> float:
-    """"""
+    """Takes a list of int and returns its 25% quartile"""
     median_value = median(list_args)
     # print("inside quartile1_4, median_value :", median_value)
     new_list = [x for x in list_args if x <= median_value]
@@ -32,6 +32,7 @@ def quartile1_4(list_args: list) -> float:
 
 
 def quartile3_4(list_args: list) -> float:
+    """Takes a list of int and returns its 75% quartile"""
     median_value = median(list_args)
     # print("inside quartile3_4, median_value :", median_value)
     new_list = [x for x in list_args if x >= median_value]
@@ -42,6 +43,7 @@ def quartile3_4(list_args: list) -> float:
 
 
 def quartile(list_args: list) -> float:
+    """Takes a list of int and returns a list of quartiles"""
     list_args = sorted(list_args)
     new_list = []
     new_list.append(quartile1_4(list_args))
@@ -50,7 +52,8 @@ def quartile(list_args: list) -> float:
     return new_list
 
 
-def variation(list_args: list) -> float:
+def variance(list_args: list) -> float:
+    """Takes a list and returns its variance"""
     n = len(list_args)
     mean_val = mean(list_args)
     # print(mean_val)
@@ -58,13 +61,32 @@ def variation(list_args: list) -> float:
     # print(diff)
     sum_diff = sum(diff)
     # print(sum_diff)
-    variation_val = sum_diff/n
-    # print(variation_val)
-    return variation_val
+    variance_val = sum_diff/n
+    # print(variance_val)
+    return variance_val
 
 
 def std_deviation(list_args: list) -> float:
-    return variation(list_args)**0.5
+    """Takes a list and returns its deviation"""
+    return variance(list_args)**0.5
+
+
+def comment_deviation(list_args: list) -> None:
+    """Indicates whether the dataset's standard deviation
+is large or small"""
+    mean_val = mean(list_args)
+    deviation = std_deviation(list_args)
+    print("   < 5% difference from mean is considered as small")
+    print("   < 15% difference from mean is considered as moderage")
+    print("   >= 15% difference from mean is considered as large")
+    print(f"   Mean: {mean_val:.4f} | < 5%: {mean_val * 0.05:.4f} | "
+          f"< 15%: {mean_val * 0.15:.4f}")
+    if deviation <= mean_val * 0.05:
+        print("   ⬇️  Deviation of the dataset is small")
+    elif deviation <= mean_val * 0.15:
+        print("   ⏺️  Deviation of the dataset is moderate")
+    else:
+        print("   ⬆️  Deviation of the dataset is large")
 
 
 def ft_statistics(*args: any, **kwargs: any) -> None:
@@ -84,5 +106,6 @@ def ft_statistics(*args: any, **kwargs: any) -> None:
             print("quartile :", quartile(list_args))
         if "std" in dict_kwargs.values():
             print("std :", std_deviation(list_args))
+            # comment_deviation(list_args)
         if "var" in dict_kwargs.values():
-            print("var :", variation(list_args))
+            print("var :", variance(list_args))

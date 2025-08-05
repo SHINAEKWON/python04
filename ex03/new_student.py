@@ -19,6 +19,8 @@ class Student:
     name: str
     surname: str
     active: bool = True
+    # init=False refuses parameter input for this field
+    # must post_init
     login: str = field(init=False)
     id: str = field(init=False)
 
